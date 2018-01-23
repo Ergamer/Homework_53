@@ -17,13 +17,19 @@ class App extends Component {
         this.setState({currentTask});
     };
     addTask = (event) => {
-        const addTask = {...this.};
-        this.setState({addTask});
+        const addTask = [...this.state.tasks];
+        const nextTask = {
+         task: this.state.currentTask,
+            id: Date.now()
+        };
+        addTask.push(nextTask);
+        this.setState({tasks: addTask});
 
     };
   render() {
     return (<div className="Container">
-        <AddTaskForm changeTask={this.changeTask}/>
+        <AddTaskForm changeTask={this.changeTask}
+        addTask={() => this.addTask()} />
         {this.state.tasks.map((task, face) => {
             return <Task text={task.task} key={task.id} />
         })
